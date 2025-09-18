@@ -18,7 +18,7 @@
         </div>
       </div>
 
-      <hr style="border: 1px solid #007bff;">
+      <hr style="border: 1px solid #212529;">
 
 @stop
 
@@ -253,7 +253,7 @@
                         </div>
                     </div>
                 </div>
-                <hr style="border: 1px solid #007bff;">
+                <hr style="border: 1px solid #212529;">
                 <div class="row">
                     <div class="col-md-12">
                        <p class="text-danger">(*) CAMPOS OBLIGATORIOS</p>

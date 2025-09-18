@@ -308,8 +308,23 @@ return [
 
         // Sidebar items:
 
+        ['header' => 'PANEL DE NAVEGACIÓN'],
+        [
+            'text' => 'INICIO',
+            'url'  => 'admin',
+            'icon' => 'fas fa-fw fa-home',
+            'classes' => 'bg-blue text-white',
+        ],
 
-        ['header' => 'PANEL DEL SISTEMA'],
+
+        [
+            'text' => 'ROLES',
+            'url'  => 'admin/roles',
+            'icon' => 'fas fa-fw fa-user-shield',
+            'classes' => 'bg-blue text-white',
+        ],
+
+        ['header' => 'CONFIGURACIÓN DEL SISTEMA'],
         [
             'text' => 'AJUSTES',
             'url' => 'admin/ajustes',
