@@ -43,7 +43,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
-                            <table class="table table-bordered table-striped table-hover table-sm">
+                            <table id="table1" class="table table-bordered table-striped table-hover table-sm">
                             <thead style="background-color: #007bff; color: white; text-align: center;">
                                 <tr>
                                     <th style="width: 10px">NUMERO</th>
@@ -52,6 +52,17 @@
                                 </tr>
                             </theadsty>
                             <tbody style="text-align: center;">
+                                @foreach ($roles as $role)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$role->name}}</td>
+                                    <td>
+
+                                        <a href="#" class="btn btn-warning btn-sm" title="EDITAR"><i class="fas fa-edit"></i> EDITAR</a>
+                                        <a href="#" class="btn btn-danger btn-sm" title="ELIMINAR"><i class="fas fa-trash-alt"></i> ELIMINAR</a>
+                                    </td>
+                                </tr>
+                                @endforeach
                             </tbody>
 
                         </table>
@@ -67,10 +78,118 @@
 @stop
 
 @section('css')
-    {{-- Add here extra stylesheets --}}
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+   <style>
+    #table1_wrapper .dt-buttons{
+        background-color: transparent;
+        box-shadow: none;
+        border: none;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    #table1_wrapper .btn{
+        color: #fff;
+        border-radius: 5px;
+        padding: 5px 15px;
+        font-size: 11px;
+    }
+
+    .btn-danger{
+        background-color: #dc3545;
+        border: none;
+    }
+    .btn-danger:hover{
+        background-color: #c82333;
+        border-color: #bd2130;
+    }
+    .btn-info{
+        background-color: #17a2b8;
+        border-color: #17a2b8;
+    }
+    .btn-info:hover{
+        background-color: #138496;
+        border-color: #117a8b;
+    }
+    .btn-success{
+        background-color: #28a745;
+        border-color: #28a745;
+    }
+    .btn-success:hover{
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+    .btn-warning{
+        background-color: #FF8C00 ;
+        border-color: #FF8C00 ;
+        color: #212529;
+    }
+    .btn-warning:hover{
+        background-color: #b86614;
+        border-color: #b86614;
+        color: #212529;
+    }
+    .btn-default{
+        background-color: #6c757d;
+        border-color: #6c757d;
+    }
+    .btn-default:hover{
+        background-color: #5a6268;
+        border-color: #545b62;
+    }
+
+
+   </style>
 @stop
 
 @section('js')
-    <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
+    <script>
+    $(function(){
+        $("#table1").DataTable({
+            "pageLength": 10,
+            "language": {
+                "emptyTable":     "NO HAY INFORMACION DISPONIBLE",
+                "info":           "Mostrando _START_ a _END_ de _TOTAL_ Roles",
+                "infoEmpty":      "MOSTRANDO 0 a 0 de 0 Roles",
+                "infoFiltered":   "(filtrado de _MAX_ total de Roles)",
+                "lengthMenu":     "Mostrar _MENU_ Roles",
+                "loadingRecords": "Cargando...",
+                "processing":     "Procesando...",
+                "search":         "Buscar:",
+                "zeroRecords":    "No se encontraron registros coincidentes",
+                "paginate": {
+                    "first":      "Primero",
+                    "last":       "Ultimo",
+                    "next":       "Siguiente",
+                    "previous":   "Anterior"
+                }
+            },
+            "responsive": true,
+            "lengthChange": true,
+            "autoWidth": false,
+            buttons: [
+                {text: '<i class="fas fa-copy"></i> COPIAR',
+                extend: 'copy',
+                className: 'btn btn-default'
+            },
+                {text: '<i class="fas fa-file-pdf"></i> PDF',
+                extend: 'pdf',
+                className: 'btn btn-danger'
+            },
+                {text: '<i class="fas fa-print"></i> CVS',
+                extend: 'print',
+                className: 'btn btn-info'
+            },
+                {text: '<i class="fas fa-file-excel"></i> EXCEL',
+                extend: 'excel',
+                className: 'btn btn-success'
+            },
+                {text: '<i class="fas fa-print"></i> IMPRIMIR',
+                extend: 'print',
+                className: 'btn btn-warning'},
+            ]
+        }).buttons().container().appendTo('#table1_wrapper .row:eq(0)');
+    })
+    </script>
 @stop

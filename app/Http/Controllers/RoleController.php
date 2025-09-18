@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
@@ -11,7 +12,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        return view('admin.roles.index');
+        $roles = \Spatie\Permission\Models\Role::all();
+        return view('admin.roles.index', compact('roles'));
     }
 
     /**
@@ -28,6 +30,18 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         //return response()->json($request->all());
+        $request->validate([
+            'name' => 'required|string|max:255|unique:roles,name',
+        ]);
+
+        $rol = new \Spatie\Permission\Models\Role();
+        $rol->name = strtoupper($request->name);
+        $rol->save();
+
+        return redirect()->route('admin.roles.index')
+        ->with('mensaje', 'ROL CREADO CON EXITO')
+        ->with('icono', 'success');
+
     }
 
     /**
