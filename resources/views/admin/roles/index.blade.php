@@ -24,7 +24,7 @@
 
 @section('content')
     <div class="row" >
-        <div class="col-md-6" >
+        <div class="col-md-9" >
             <div class="card card-outline card-primary" >
               <div class="card-header">
                 <h3 class="card-title">ROLES REGISTRADOS</h3>
@@ -56,10 +56,37 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$role->name}}</td>
-                                    <td>
+                                    <td class="d-flex justify-content-center" style="gap: 5px;">
+                                        <a href="#" class="btn btn-warning btn-sm" title="EDITAR"><i class="fas fa-check"></i> PERMISOS</a>
+                                        <a href="{{url('/admin/rol/'.$role->id.'/edit')}}" class="btn btn-success btn-sm" title="EDITAR"><i class="fas fa-edit"></i> EDITAR</a>
+                                        <form action="{{url('/admin/rol/'.$role->id)}}" method="POST" id="miFormulario{{ $role->id }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm"
+                                            onclick="preguntar{{$role->id}}(event)">
+                                            <i class="fas fa-trash-alt"></i> ELIMINAR</button>
 
-                                        <a href="#" class="btn btn-warning btn-sm" title="EDITAR"><i class="fas fa-edit"></i> EDITAR</a>
-                                        <a href="#" class="btn btn-danger btn-sm" title="ELIMINAR"><i class="fas fa-trash-alt"></i> ELIMINAR</a>
+                                        </form>
+                                        <script>
+                                            function preguntar{{$role->id}}(event){
+                                                event.preventDefault();
+                                                Swal.fire({
+                                                    title: '¿ESTA SEGURO DE ELIMINAR EL ROL?',
+                                                    text: "NO PODRA RECUPERAR LA INFORMACION",
+                                                    icon: 'warning',
+                                                    showCancelButton: true,
+                                                    confirmButtonColor: '#3085d6',
+                                                    cancelButtonColor: '#d33',
+                                                    confirmButtonText: 'SI, ELIMINAR',
+                                                    cancelButtonText: 'CANCELAR'
+                                                }).then((result) => {
+                                                    if (result.isConfirmed) {
+                                                        document.getElementById('miFormulario{{ $role->id }}').submit();
+                                                    }
+                                                })
+                                            }
+                                        </script>
+
                                     </td>
                                 </tr>
                                 @endforeach

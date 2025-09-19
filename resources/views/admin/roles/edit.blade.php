@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">REGISTRO DE ROLES</h1>
+            <h1 class="m-0">MODIFICAR ROL</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -25,7 +25,7 @@
 @section('content')
     <div class="row" >
         <div class="col-md-4" >
-            <div class="card  card-primary" >
+            <div class="card card-success" >
               <div class="card-header">
                 <h3 class="card-title" >LLENE EL FORMULARIO</h3>
 
@@ -38,8 +38,9 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <form action="{{url('/admin/roles/create')}}" method="POST">
+                <form action="{{url('/admin/rol/'.$role->id)}}" method="POST">
                     @csrf
+                    @method('PUT')
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
@@ -49,7 +50,7 @@
                                         <span class="input-group-text"><i class="fas fa-user-check"></i></span>
                                     </div>
                                     <input type="text" class="form-control"
-                                     value="{{old('name')}}" name="name"
+                                     value="{{old('name',$role->name)}}" name="name"
                                      placeholder="INGRESE NOMBRE DE ROL" required>
                                 </div>
                                 @error('name')
@@ -63,7 +64,7 @@
                     <div class="row">
                         <div class="col-md-12" style="text-align: center;">
                             <a href="{{url('/admin/roles')}}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> REGRESAR</a>
-                            <button type="submit" class="btn btn-primary "><i class="fas fa-save"></i> GUARDAR</button>
+                            <button type="submit" class="btn btn-success "><i class="fas fa-save"></i> ACTUALIZAR</button>
                         </div>
                     </div>
                 </form>

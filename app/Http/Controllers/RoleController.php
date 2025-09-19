@@ -55,24 +55,40 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $role = \Spatie\Permission\Models\Role::find($id);
+        return view('admin.roles.edit', compact('role'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        //return response()->json($request->all());
+        $request->validate([
+            'name' => 'required|string|max:255|unique:roles,name,'.$id,
+        ]);
+        $rol = \Spatie\Permission\Models\Role::find($id);
+        $rol->name = strtoupper($request->name);
+        $rol->save();
+
+        return redirect()->route('admin.roles.index')
+        ->with('mensaje', 'ROL ACTUALIZADO CON EXITO')
+        ->with('icono', 'success');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $rol = \Spatie\Permission\Models\Role::find($id);
+        $rol->delete();
+
+        return redirect()->route('admin.roles.index')
+        ->with('mensaje', 'ROL ELIMINADO CON EXITO')
+        ->with('icono', 'success');
     }
 }
