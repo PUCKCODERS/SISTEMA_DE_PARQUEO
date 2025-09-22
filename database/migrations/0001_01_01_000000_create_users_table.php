@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+
 return new class extends Migration
 {
     /**
@@ -18,6 +19,24 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+
+            $table->string('nombres');
+            $table->string('apellidos');
+            $table->enum('tipo_documento', ['DNI','PASAPORTE','CARNET_EXTRANJERIA','RUC','CI']);
+            $table->string('numero_documento')->unique();
+            $table->string('celular');
+            $table->string('fecha_nacimiento');
+            $table->enum('genero', ['MASCULINO','FEMENINO','OTRO']);
+            $table->string('direccion');
+            $table->string('foto')->nullable();
+            $table->string('contacto_nombre');
+            $table->string('contacto_telefono');
+            $table->string('contacto_parentesco');
+            $table->string('estado')->default(true);
+            $table->softDeletes();
+
+
+
             $table->timestamps();
         });
 

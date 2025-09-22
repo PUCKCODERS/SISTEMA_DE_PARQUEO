@@ -315,12 +315,16 @@ return [
             'icon' => 'fas fa-fw fa-home',
             'classes' => 'bg-blue text-white',
         ],
-
-
         [
             'text' => 'ROLES',
             'url'  => 'admin/roles',
             'icon' => 'fas fa-fw fa-user-shield',
+            'classes' => 'bg-blue text-white',
+        ],
+        [
+            'text' => 'USUARIOS',
+            'url' => 'admin/usuarios',
+            'icon' => 'fa fa-fw fa-users',
             'classes' => 'bg-blue text-white',
         ],
 
