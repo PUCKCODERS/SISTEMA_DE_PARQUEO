@@ -24,3 +24,4 @@ Route::put('/admin/rol/{id}', [App\Http\Controllers\RoleController::class,'updat
 Route::delete('/admin/rol/{id}', [App\Http\Controllers\RoleController::class,'destroy'])->name('admin.roles.destroy')->middleware('auth');
 
 //RUTAS PARA USUARIOS
+
