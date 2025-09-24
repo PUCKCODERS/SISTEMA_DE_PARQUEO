@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
+        $this->call(RoleSeeder::class);
+
         //super admin
         User::create([
             'name' => 'Super Admin',
@@ -38,7 +40,7 @@ class DatabaseSeeder extends Seeder
             'contacto_parentesco' => 'Amigo',
             'estado' => true,
             ]
-        );
+        )->assignRole('SUPER ADMIN');
 
         Ajuste::create([
             'nombre' => 'PARQUEO TURUBAMBA ALTO',

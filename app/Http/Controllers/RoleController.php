@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
+use \Spatie\Permission\Models\Role;
+
 
 class RoleController extends Controller
 {
@@ -34,7 +36,7 @@ class RoleController extends Controller
             'name' => 'required|string|max:255|unique:roles,name',
         ]);
 
-        $rol = new \Spatie\Permission\Models\Role();
+        $rol = new Role();
         $rol->name = strtoupper($request->name);
         $rol->save();
 
@@ -57,7 +59,7 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        $role = \Spatie\Permission\Models\Role::find($id);
+        $role = Role::find($id);
         return view('admin.roles.edit', compact('role'));
     }
 
@@ -70,7 +72,7 @@ class RoleController extends Controller
         $request->validate([
             'name' => 'required|string|max:255|unique:roles,name,'.$id,
         ]);
-        $rol = \Spatie\Permission\Models\Role::find($id);
+        $rol = Role::find($id);
         $rol->name = strtoupper($request->name);
         $rol->save();
 
@@ -84,7 +86,7 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        $rol = \Spatie\Permission\Models\Role::find($id);
+        $rol = Role::find($id);
         $rol->delete();
 
         return redirect()->route('admin.roles.index')
